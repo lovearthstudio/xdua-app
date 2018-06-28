@@ -3,6 +3,10 @@ import React, { Component } from 'react'
 import { Jumbotron, Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import { Link } from 'react-router-dom'
+
+
+import { SIGN_UP } from 'src/data/route'
 
 @inject(stores => {
   let { userStore } = stores
@@ -66,6 +70,11 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
+        <Link to={SIGN_UP}>
+          <Button>
+            SignUp
+          </Button>
+        </Link>
         <Jumbotron>
           <h2 className='display-4'>登陆页面</h2>
           {this.renderError()}

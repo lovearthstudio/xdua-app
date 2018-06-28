@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import {inject, observer} from 'mobx-react/index'
 
 import {
   LOGIN,
-  PROFILE,
+  PRIVATE,
+  SIGN_UP,
 } from 'src/data/route'
 
 import FallbackPage  from '../FallbackPage'
 import LoginPage from './user/LoginPage'
-import {inject, observer} from 'mobx-react/index'
+import SignUpPage from './SignUpPage'
 
 
 @inject(stores => {
@@ -37,12 +39,13 @@ class PublicRoutePage extends Component {
     let { userToken, push } = this.props
 
     if (!_.isNil(userToken)) {
-      push(PROFILE)
+      push(PRIVATE)
     }
 
     return (
       <Switch>
         <Route path={LOGIN} component={LoginPage} />
+        <Route path={SIGN_UP} component={SignUpPage}/>
         <Route component={FallbackPage}/>
       </Switch>
     )

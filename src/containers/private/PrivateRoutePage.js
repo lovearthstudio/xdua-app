@@ -8,11 +8,14 @@ import {
   LOGIN,
   PROFILE,
   MY_APPS,
+  MY_GROUPS,
 } from 'src/data/route'
 
 import FallbackPage  from '../FallbackPage'
 import ProfilePage from './profile/ProfilePage'
 import MyAppPage from './app/MyAppPage'
+import PrivatePage from './PrivatePage'
+import GroupRoutePage from './group/GroupRoutePage'
 
 import NavBar from '../../components/NavBar'
 
@@ -49,6 +52,8 @@ class PrivateRoutePage extends Component {
         <Switch>
           <Route exact path={PROFILE} component={ProfilePage} />
           <Route exact path={MY_APPS} component={MyAppPage}/>
+          <Route path={MY_GROUPS} component={GroupRoutePage}/>
+          <Route path={'*'} component={PrivatePage}/>
           <Route component={FallbackPage}/>
         </Switch>
       </div>
