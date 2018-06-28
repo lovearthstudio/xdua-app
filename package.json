@@ -5,7 +5,7 @@
   "main": ".eslintrc.js",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --open --config ./config/webpack.dev.js",
-    "build:production": "API_END_POINT=http://www.xdua.com/ webpack --config ./config/webpack.prod.js",
+    "build:production": "API_END_POINT=http://agi.xdua.com/ webpack --config ./config/webpack.prod.js",
     "deploy": "gh-pages -d build",
     "lint": "./node_modules/.bin/eslint ./src ./config",
     "fix": "./node_modules/.bin/eslint ./src ./config --fix",
@@ -61,6 +61,7 @@
   "dependencies": {
     "alertify.js": "^1.0.12",
     "axios": "^0.18.0",
+    "crypto-js": "^3.1.9-1",
     "history": "^4.7.2",
     "json2csv": "^4.1.2",
     "json2xls": "^0.1.2",

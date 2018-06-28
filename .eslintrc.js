@@ -42,7 +42,7 @@ module.exports = {
       'never'
     ],
     'func-style': [
-      'error',
+      'off',
       'expression'
     ],
     'comma-dangle': [
