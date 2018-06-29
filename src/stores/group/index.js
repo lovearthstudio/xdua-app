@@ -47,7 +47,7 @@ class Group {
   @action async deleteUserGroup({ token, ugrp }) {
     try {
       await deleteUserGroup({ token, ugrp })
-      redirectToGroupsPage()
+      self.getGroups(token)
     } catch (err) {
       self.error = err.message
     }

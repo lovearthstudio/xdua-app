@@ -6,13 +6,12 @@ import _ from 'lodash'
 
 @inject(stores => {
   const { userStore, groupStore } = stores
-  const { userToken, userId, ugrp } = userStore
+  const { userToken, userId } = userStore
   const { group } = groupStore
   return {
     userToken,
     userId,
     group,
-    ugrp,
   }
 })
 @observer
@@ -66,11 +65,12 @@ class GroupForm extends Component {
       name,
       avatar: 'null',
       brief,
-      ugrp,
     }
     if (_.isNil(group)) {
       data.bywho = userId
       data.code = code
+    } else {
+      data.ugrp = group.id
     }
     submit(data)
   }
@@ -83,7 +83,6 @@ class GroupForm extends Component {
     }),
     userToken: PropTypes.string,
     userId: PropTypes.string,
-    ugrp: PropTypes.string,
     submit: PropTypes.func.isRequired,
     creating: PropTypes.bool,
   }

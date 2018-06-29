@@ -11,11 +11,10 @@ import { CREATE_GROUP } from 'src/data/route'
 @inject(stores => {
   let { groupStore, userStore } = stores
   let { groups, getGroups, redirectToSettings, deleteUserGroup } = groupStore
-  let { userToken, ugrp } = userStore
+  let { userToken } = userStore
 
   return {
     userToken,
-    ugrp,
     groups,
     getGroups,
     redirectToSettings,
@@ -39,7 +38,6 @@ class ProfilePage extends Component {
     redirectToSettings: PropTypes.func,
     deleteUserGroup: PropTypes.func,
     userToken: PropTypes.string,
-    ugrp: PropTypes.string,
   }
 
   renderType(type) {
@@ -55,14 +53,13 @@ class ProfilePage extends Component {
       redirectToSettings,
       deleteUserGroup,
       userToken,
-      ugrp,
     } = this.props
     return _.map(groups, (g) => {
       const editGroup = () => {
         redirectToSettings({ groupId: g.id })
       }
       const deleteGroup = () => {
-        deleteUserGroup({ token:userToken, ugrp })
+        deleteUserGroup({ token:userToken, ugrp: g.id })
       }
       return (
         <tr key={g.id}>

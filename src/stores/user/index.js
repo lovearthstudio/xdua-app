@@ -10,7 +10,6 @@ import { initializeDuaId } from 'src/api/methods/dua'
 class User {
   @observable userToken = null
   @observable userId = null
-  @observable ugrp = null
   @observable error = null
 
   constructor() {
@@ -25,7 +24,6 @@ class User {
           console.log(res)
           self.userToken = res.token
           self.userId = res.user_id
-          self.ugrp = res.ugrp
         } catch (err) {
           self.error = err.message
         }})
@@ -34,7 +32,6 @@ class User {
   @action logOut() {
     self.userToken = null
     self.userId = null
-    self.ugrp = null
     setUserToken(null)
   }
 
