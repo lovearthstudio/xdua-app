@@ -5,8 +5,8 @@
   "main": ".eslintrc.js",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --open --config ./config/webpack.dev.js",
-    "build:production": "API_END_POINT=http://agi.xdua.com/ webpack --config ./config/webpack.prod.js",
-    "deploy": "gh-pages -d build",
+    "build:production": "APP_SECRET=e54b127abc7cca1862dac91db6256190 APP_KEY=aHEVYhE0 API_END_POINT=http://agi.xdua.com/ webpack --config ./config/webpack.prod.js",
+    "deploy": "./node_modules/.bin/gh-pages -d build",
     "lint": "./node_modules/.bin/eslint ./src ./config",
     "fix": "./node_modules/.bin/eslint ./src ./config --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
