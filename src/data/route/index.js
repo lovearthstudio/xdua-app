@@ -11,3 +11,6 @@ export const MY_APPS = PRIVATE + '/myApps'
 export const MY_GROUPS = PRIVATE + '/myGroups'
 
 export const CREATE_GROUP = MY_GROUPS + '/create'
+
+export const GROUP_ID = ':grpId'
+export const EDIT_GROUP = MY_GROUPS + '/edit/' + GROUP_ID

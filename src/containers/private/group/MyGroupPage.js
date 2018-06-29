@@ -10,13 +10,16 @@ import { CREATE_GROUP } from 'src/data/route'
 
 @inject(stores => {
   let { groupStore, userStore } = stores
-  let { groups, getGroups } = groupStore
-  let { userToken } = userStore
+  let { groups, getGroups, redirectToSettings, deleteUserGroup } = groupStore
+  let { userToken, ugrp } = userStore
 
   return {
+    userToken,
+    ugrp,
     groups,
     getGroups,
-    userToken,
+    redirectToSettings,
+    deleteUserGroup,
   }
 })
 @observer
@@ -33,20 +36,43 @@ class ProfilePage extends Component {
   static propTypes = {
     groups: MobxPropTypes.observableArray,
     getGroups: PropTypes.func,
+    redirectToSettings: PropTypes.func,
+    deleteUserGroup: PropTypes.func,
     userToken: PropTypes.string,
+    ugrp: PropTypes.string,
+  }
+
+  renderType(type) {
+    if (type === '1') {
+      return '已激活'
+    }
+    return '未激活'
   }
 
   renderGroups() {
-    const { groups } = this.props
-    console.log(groups)
+    const {
+      groups,
+      redirectToSettings,
+      deleteUserGroup,
+      userToken,
+      ugrp,
+    } = this.props
     return _.map(groups, (g) => {
+      const editGroup = () => {
+        redirectToSettings({ groupId: g.id })
+      }
+      const deleteGroup = () => {
+        deleteUserGroup({ token:userToken, ugrp })
+      }
       return (
-        <tr key={g.ugrp}>
+        <tr key={g.id}>
           <th scope="row">1</th>
           <th scope="row">{g.name}</th>
-          <th scope="row">{g.enabled}</th>
+          <th scope="row">{this.renderType(g.enabled)}</th>
           <th scope="row">{g.brief}</th>
           <th scope="row">{g.cstamp}</th>
+          <th scope="row"><button onClick={editGroup}>编辑</button></th>
+          <th scope="row"><button onClick={deleteGroup}>删除</button></th>
         </tr>
       )
     })
@@ -70,9 +96,10 @@ class ProfilePage extends Component {
             <tr>
               <th>#</th>
               <th>名称</th>
-              <th>类型</th>
+              <th>状态</th>
               <th>描述</th>
               <th>创建修改时间</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody>

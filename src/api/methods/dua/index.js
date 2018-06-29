@@ -44,6 +44,6 @@ export async function initializeDuaId() {
     throw new Error(data)
   }
 
-  const { dua_id } = data.result
-  setDuaId(dua_id)
+  const { id } = data.result
+  setDuaId(id)
 }
