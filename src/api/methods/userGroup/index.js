@@ -30,14 +30,13 @@ export async function createUserGroup({ token, bywho, code, name, avatar, brief 
   return generalResponseBuilder(res)
 }
 
-export async function deleteUserGroup({ token, code }) {
+export async function deleteUserGroup({ token, ugrp }) {
 
-  const API_PATH = '/ugrp/' + code
+  const API_PATH = '/ugrp/' + ugrp
   const generalBody = buildGeneralBody('DELETE', API_PATH)
 
   const params = Object.assign({}, {
     token,
-    code,
   })
   let res = await axios.delete(
     API_PATH,
@@ -51,8 +50,8 @@ export async function deleteUserGroup({ token, code }) {
 
 }
 
-export async function editUserGroup({ token, code, name, avatar, brief, enabled }) {
-  const API_PATH = '/ugrp/' + code
+export async function editUserGroup({ token, ugrp, code, name, avatar, brief, enabled }) {
+  const API_PATH = '/ugrp/' + ugrp
   const generalBody = buildGeneralBody('PUT', API_PATH)
 
   const body = Object.assign({}, {
@@ -76,13 +75,12 @@ export async function editUserGroup({ token, code, name, avatar, brief, enabled 
 
 }
 
-export async function getUserGroup({ token, code }) {
-  const API_PATH = '/ugrp/' + code
+export async function getUserGroup({ token, ugrp }) {
+  const API_PATH = '/ugrp/' + ugrp
   const generalBody = buildGeneralBody('GET', API_PATH)
 
   const params = {
     token,
-    code,
   }
 
   let res = await axios.get(

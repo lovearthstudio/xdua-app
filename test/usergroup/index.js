@@ -9,11 +9,12 @@ import {
 const code = 'lkfasdjflkasjf'
 const avatar1 = 'http://res.cloudinary.com/dw5ab4upj/image/upload/v1520473318/izqj1p1lovupo7a1lqck.png'
 const avatar2 = 'http://res.cloudinary.com/dw5ab4upj/image/upload/v1520473392/wxykhlcmzzqna3w7agfz.png'
+const ugrp = '0Ve0aLTh'
 
 export async function getUserGroupTest(token) {
   return getUserGroup({
-    token,
-    code,
+    // token,
+    ugrp,
   })
 }
 
@@ -31,14 +32,14 @@ export async function createUserGroupTest(token, user_id) {
 export async function deleteUserGroupTest(token) {
   return deleteUserGroup({
     token,
-    code,
+    ugrp,
   })
 }
 
 export async function editUserGroupTest(token) {
   return editUserGroup({
     token,
-    code,
+    ugrp,
     name: 'chenxi-test edit',
     avatar: avatar2,
     brief: 'chenxi-test edit brief',
