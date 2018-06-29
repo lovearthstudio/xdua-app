@@ -37,7 +37,6 @@ class Group {
 
   @action async createUserGroup({ token, bywho, code, name, avatar, brief }) {
     try {
-      debugger
       await createUserGroup({ token, bywho, code, name, avatar, brief })
       redirectToGroupsPage()
     } catch (err) {

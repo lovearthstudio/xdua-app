@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Jumbotron } from 'reactstrap'
-import { inject, observer, PropTypes as MobxPropTypes } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import PropTypes from 'prop-types'
 
 import GroupForm from 'src/components/GroupForm'

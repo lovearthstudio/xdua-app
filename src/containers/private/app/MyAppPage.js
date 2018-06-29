@@ -31,7 +31,7 @@ import _ from 'lodash'
   // }
 })
 @observer
-class ProfilePage extends Component {
+class MyAppPage extends Component {
   constructor(props) {
     super(props)
   }
@@ -60,4 +60,4 @@ class ProfilePage extends Component {
   }
 }
 
-export default ProfilePage
+export default MyAppPage

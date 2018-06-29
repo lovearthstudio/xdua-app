@@ -7,6 +7,10 @@ import {
   getUserGroupTest,
   queryUserGroupTest,
 } from './usergroup'
+import {
+  roleTest,
+} from './role'
+
 
 initializeDuaId().then(
   async function() {
@@ -23,17 +27,17 @@ initializeDuaId().then(
     // console.log(data)
     // console.log('------------------------------------')
 
-    data = await queryUserGroupTest(token)
+    // data = await queryUserGroupTest(token)
 
-    console.log('queryUserGroup Test')
-    console.log(data)
-    console.log('------------------------------------')
+    // console.log('queryUserGroup Test')
+    // console.log(data)
+    // console.log('------------------------------------')
 
-    data = await getUserGroupTest(token)
-
-    console.log('getUserGroupTest Test')
-    console.log(data)
-    console.log('------------------------------------')
+    // data = await getUserGroupTest(token)
+    //
+    // console.log('getUserGroupTest Test')
+    // console.log(data)
+    // console.log('------------------------------------')
 
     // data = await editUserGroupTest(token)
     //
@@ -47,6 +51,7 @@ initializeDuaId().then(
     // console.log(data)
     // console.log('------------------------------------')
 
+    await roleTest(token)
 
   }
 )

@@ -59,7 +59,6 @@ class GroupForm extends Component {
   onSubmit(e) {
     e.preventDefault()
     let { name, code, brief } = this.state
-    debugger
     let { userId, userToken, submit, group } = this.props
     let data = {
       token: userToken,

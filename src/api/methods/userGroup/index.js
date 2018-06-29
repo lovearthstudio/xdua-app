@@ -1,13 +1,13 @@
 import {
   axios,
-  buildGeneralBody,
+  buildGeneralHeaders,
   generalResponseBuilder,
 } from '../../generalImports'
 
 export async function createUserGroup({ token, bywho, code, name, avatar, brief }) {
 
   const API_PATH = '/ugrp'
-  const generalBody = buildGeneralBody('POST', API_PATH)
+  const generalHeaders = buildGeneralHeaders('POST', API_PATH)
 
   const body = Object.assign({}, {
     token,
@@ -23,7 +23,7 @@ export async function createUserGroup({ token, bywho, code, name, avatar, brief 
     API_PATH,
     body,
     {
-      headers: generalBody,
+      headers: generalHeaders,
     }
   )
 
@@ -33,7 +33,7 @@ export async function createUserGroup({ token, bywho, code, name, avatar, brief 
 export async function deleteUserGroup({ token, userGroupId }) {
 
   const API_PATH = '/ugrp/' + userGroupId
-  const generalBody = buildGeneralBody('DELETE', API_PATH)
+  const generalHeaders = buildGeneralHeaders('DELETE', API_PATH)
 
   const params = Object.assign({}, {
     token,
@@ -42,7 +42,7 @@ export async function deleteUserGroup({ token, userGroupId }) {
     API_PATH,
     {
       params,
-      headers: generalBody,
+      headers: generalHeaders,
     }
   )
 
@@ -52,7 +52,7 @@ export async function deleteUserGroup({ token, userGroupId }) {
 
 export async function editUserGroup({ token, userGroupId, code, name, avatar, brief, enabled }) {
   const API_PATH = '/ugrp/' + userGroupId
-  const generalBody = buildGeneralBody('PUT', API_PATH)
+  const generalHeaders = buildGeneralHeaders('PUT', API_PATH)
 
   const body = Object.assign({}, {
     token,
@@ -67,7 +67,7 @@ export async function editUserGroup({ token, userGroupId, code, name, avatar, br
     API_PATH,
     body,
     {
-      headers: generalBody,
+      headers: generalHeaders,
     }
   )
 
@@ -77,7 +77,7 @@ export async function editUserGroup({ token, userGroupId, code, name, avatar, br
 
 export async function getUserGroup({ token, userGroupId }) {
   const API_PATH = '/ugrp/' + userGroupId
-  const generalBody = buildGeneralBody('GET', API_PATH)
+  const generalHeaders = buildGeneralHeaders('GET', API_PATH)
 
   const params = {
     token,
@@ -86,7 +86,7 @@ export async function getUserGroup({ token, userGroupId }) {
   let res = await axios.get(
     API_PATH,
     {
-      headers: generalBody,
+      headers: generalHeaders,
       params,
     }
   )
@@ -97,7 +97,7 @@ export async function getUserGroup({ token, userGroupId }) {
 
 export async function queryUserGroup({ token, uid, name, brief, offset, limit, order }) {
   const API_PATH = '/ugrp'
-  const generalBody = buildGeneralBody('GET', API_PATH)
+  const generalHeaders = buildGeneralHeaders('GET', API_PATH)
 
   const params = Object.assign({}, {
     token,
@@ -112,7 +112,7 @@ export async function queryUserGroup({ token, uid, name, brief, offset, limit, o
   let res = await axios.get(
     API_PATH,
     {
-      headers: generalBody,
+      headers: generalHeaders,
       params,
     }
   )

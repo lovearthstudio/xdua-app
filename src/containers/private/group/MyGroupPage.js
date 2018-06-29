@@ -6,6 +6,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import { CREATE_GROUP } from 'src/data/route'
+import {buildParamURI} from "src/util";
+import { GROUP_DETAIL, USER_GROUP_ID} from "src/data/route";
 
 
 @inject(stores => {
@@ -22,7 +24,7 @@ import { CREATE_GROUP } from 'src/data/route'
   }
 })
 @observer
-class ProfilePage extends Component {
+class MyGroupPage extends Component {
   constructor(props) {
     super(props)
   }
@@ -55,17 +57,29 @@ class ProfilePage extends Component {
       userToken,
     } = this.props
     return _.map(groups, (g) => {
+      let userGroupId = g.id
       const editGroup = () => {
-        redirectToSettings({ userGroupId: g.id })
+        redirectToSettings({ userGroupId })
       }
       const deleteGroup = () => {
-        deleteUserGroup({ token:userToken, userGroupId: g.id })
+        deleteUserGroup({ token:userToken, userGroupId })
       }
+
+      const groupDetailURI = buildParamURI({
+        originalURI: GROUP_DETAIL,
+        paramName: USER_GROUP_ID,
+        substitutedValue: userGroupId,
+      })
       return (
         <tr key={g.id}>
           <th scope="row">1</th>
-          <th scope="row">{g.name}</th>
-          <th scope="row">{ProfilePage.renderType(g.enabled)}</th>
+
+          <th scope="row">
+            <Link to={groupDetailURI}>
+              {g.name}
+            </Link>
+          </th>
+          <th scope="row">{MyGroupPage.renderType(g.enabled)}</th>
           <th scope="row">{g.brief}</th>
           <th scope="row">{g.cstamp}</th>
           <th scope="row"><Button color={'info'} onClick={editGroup}>编辑</Button></th>
@@ -108,4 +122,4 @@ class ProfilePage extends Component {
   }
 }
 
-export default ProfilePage
+export default MyGroupPage

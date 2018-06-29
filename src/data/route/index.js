@@ -14,3 +14,10 @@ export const CREATE_GROUP = MY_GROUPS + '/create'
 
 export const USER_GROUP_ID = ':userGroupId'
 export const EDIT_GROUP = MY_GROUPS + '/edit/' + USER_GROUP_ID
+
+export const GROUP_DETAIL = MY_GROUPS + '/group/' + USER_GROUP_ID + '/detail'
+
+// ROLE
+export const ROLE = '/role'
+export const ROLE_ID = ':roleId'
+export const ROLE_LIST = GROUP_DETAIL + ROLE

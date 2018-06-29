@@ -10,5 +10,5 @@ export {
 
 export { axios } from './axios'
 export { generateSign } from './utils/Sign'
-export { buildGeneralBody } from './utils/generalBodyBuilder'
+export { buildGeneralHeaders } from './utils/buildGeneralHeaders'
 export { generalResponseBuilder } from './utils/generalResponseBuilder'

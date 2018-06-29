@@ -6,7 +6,7 @@ import {
 } from '../data'
 
 import { generateSign } from './Sign'
-export function buildGeneralBody(METHOD, API_PATH) {
+export function buildGeneralHeaders(METHOD, API_PATH) {
   return {
     dua: getDuaId(),
     apiv: API_VERSION,
