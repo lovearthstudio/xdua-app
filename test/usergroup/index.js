@@ -9,12 +9,12 @@ import {
 const code = 'lkfasdjflkasjf'
 const avatar1 = 'http://res.cloudinary.com/dw5ab4upj/image/upload/v1520473318/izqj1p1lovupo7a1lqck.png'
 const avatar2 = 'http://res.cloudinary.com/dw5ab4upj/image/upload/v1520473392/wxykhlcmzzqna3w7agfz.png'
-const ugrp = '0Ve0aLTh'
+const userGroupId = 'q9jVfYWL'
 
 export async function getUserGroupTest(token) {
   return getUserGroup({
     // token,
-    ugrp,
+    userGroupId,
   })
 }
 

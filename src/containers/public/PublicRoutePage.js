@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import {inject, observer} from 'mobx-react/index'
@@ -16,12 +16,10 @@ import SignUpPage from './SignUpPage'
 
 
 @inject(stores => {
-  let { userStore, routingStore } = stores
+  let { userStore } = stores
   let { userToken } = userStore
-  let { push } = routingStore
   return {
     userToken,
-    push,
   }
 })
 @observer
@@ -32,14 +30,13 @@ class PublicRoutePage extends Component {
 
   static propTypes = {
     userToken: PropTypes.string,
-    push: PropTypes.func,
   }
 
   render() {
-    let { userToken, push } = this.props
+    let { userToken } = this.props
 
     if (!_.isNil(userToken)) {
-      push(PRIVATE)
+      return <Redirect to={PRIVATE}/>
     }
 
     return (

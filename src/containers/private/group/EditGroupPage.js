@@ -22,10 +22,10 @@ class EditGroupPage extends Component {
     super(props)
   }
 
-  async componentWillMount() {
+  componentWillMount() {
     const { userToken, match, getUserGroup } = this.props
-    const { grpId }  = match.params
-    getUserGroup({ token: userToken, ugrp: grpId })
+    const { userGroupId }  = match.params
+    getUserGroup({ token: userToken, userGroupId: userGroupId })
   }
 
   static propTypes = {

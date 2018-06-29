@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {inject, observer} from 'mobx-react'
-import { Route, Switch } from 'react-router-dom'
+import { inject, observer } from 'mobx-react'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
@@ -20,12 +20,10 @@ import GroupRoutePage from './group/GroupRoutePage'
 import NavBar from '../../components/NavBar'
 
 @inject(stores => {
-  let { userStore, routingStore } = stores
+  let { userStore } = stores
   let { userToken } = userStore
-  let { push } = routingStore
   return {
     userToken,
-    push,
   }
 })
 @observer
@@ -36,14 +34,14 @@ class PrivateRoutePage extends Component {
 
   static propTypes = {
     userToken: PropTypes.string,
-    push: PropTypes.func,
   }
 
   render() {
-    let { userToken, push } = this.props
+    let { userToken } = this.props
 
     if (_.isNil(userToken)) {
-      push(LOGIN)
+      return <Redirect to={LOGIN}/>
+
     }
 
     return (

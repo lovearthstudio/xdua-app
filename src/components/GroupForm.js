@@ -59,18 +59,20 @@ class GroupForm extends Component {
   onSubmit(e) {
     e.preventDefault()
     let { name, code, brief } = this.state
-    let { userId, userToken, submit, group, ugrp } = this.props
+    debugger
+    let { userId, userToken, submit, group } = this.props
     let data = {
       token: userToken,
       name,
-      avatar: 'null',
+      // todo: refactor this to the data folder
+      avatar: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/profile-icon.png',
       brief,
     }
-    if (_.isNil(group)) {
+    if (_.isNil(group.id)) {
       data.bywho = userId
       data.code = code
     } else {
-      data.ugrp = group.id
+      data.userGroupId = group.id
     }
     submit(data)
   }

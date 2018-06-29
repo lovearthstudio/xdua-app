@@ -21,7 +21,6 @@ class User {
       async function() {
         try {
           let res = await login({ username, password })
-          console.log(res)
           self.userToken = res.token
           self.userId = res.user_id
         } catch (err) {

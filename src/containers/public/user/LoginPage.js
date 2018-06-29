@@ -91,7 +91,7 @@ class LoginPage extends Component {
             <FormGroup>
               <Label for="password"><h4>密码</h4></Label>
               <Input
-                type="text"
+                type="password"
                 id="password"
                 onChange={this.handlePasswordChange}
               />

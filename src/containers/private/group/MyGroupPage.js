@@ -1,6 +1,6 @@
 import { inject, observer, PropTypes as MobxPropTypes } from 'mobx-react'
 import React, { Component } from 'react'
-import { Jumbotron, Table } from 'reactstrap'
+import { Jumbotron, Table, Button } from 'reactstrap'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -40,7 +40,7 @@ class ProfilePage extends Component {
     userToken: PropTypes.string,
   }
 
-  renderType(type) {
+  static renderType(type) {
     if (type === '1') {
       return '已激活'
     }
@@ -56,20 +56,20 @@ class ProfilePage extends Component {
     } = this.props
     return _.map(groups, (g) => {
       const editGroup = () => {
-        redirectToSettings({ groupId: g.id })
+        redirectToSettings({ userGroupId: g.id })
       }
       const deleteGroup = () => {
-        deleteUserGroup({ token:userToken, ugrp: g.id })
+        deleteUserGroup({ token:userToken, userGroupId: g.id })
       }
       return (
         <tr key={g.id}>
           <th scope="row">1</th>
           <th scope="row">{g.name}</th>
-          <th scope="row">{this.renderType(g.enabled)}</th>
+          <th scope="row">{ProfilePage.renderType(g.enabled)}</th>
           <th scope="row">{g.brief}</th>
           <th scope="row">{g.cstamp}</th>
-          <th scope="row"><button onClick={editGroup}>编辑</button></th>
-          <th scope="row"><button onClick={deleteGroup}>删除</button></th>
+          <th scope="row"><Button color={'info'} onClick={editGroup}>编辑</Button></th>
+          <th scope="row"><Button color={'danger'} onClick={deleteGroup}>删除</Button></th>
         </tr>
       )
     })
@@ -85,7 +85,7 @@ class ProfilePage extends Component {
         <div>
           <input placeholder='search group'/>
           <Link to={CREATE_GROUP}>
-            <button >create Group</button>
+            <Button color={'primary'} >create Group</Button>
           </Link>
         </div>
         <Table responsive>

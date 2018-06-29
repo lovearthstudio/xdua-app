@@ -35,17 +35,17 @@ initializeDuaId().then(
     console.log(data)
     console.log('------------------------------------')
 
-    data = await editUserGroupTest(token)
-
-    console.log('editUserGroupTest Test')
-    console.log(data)
-    console.log('------------------------------------')
-
-    data = await deleteUserGroupTest(token)
-
-    console.log('deleteUserGroupTest Test')
-    console.log(data)
-    console.log('------------------------------------')
+    // data = await editUserGroupTest(token)
+    //
+    // console.log('editUserGroupTest Test')
+    // console.log(data)
+    // console.log('------------------------------------')
+    //
+    // data = await deleteUserGroupTest(token)
+    //
+    // console.log('deleteUserGroupTest Test')
+    // console.log(data)
+    // console.log('------------------------------------')
 
 
   }
