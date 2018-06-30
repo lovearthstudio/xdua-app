@@ -1,4 +1,10 @@
-export { md5 }  from './utils/md5'
+export {
+  md5,
+}  from './utils/md5'
+
+export {
+  formatPhoneNumber,
+} from './utils/format'
 
 export {
   APP_SECRET,
