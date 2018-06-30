@@ -14,7 +14,7 @@ import {
 } from 'src/api/methods/login'
 import { getDuaIdFromServer } from 'src/api/methods/dua'
 
-class User {
+class Authentication {
   @observable token = null
   @observable userId = null
   @observable error = null
@@ -56,7 +56,7 @@ class User {
 
 }
 
-const self = new User()
+const self = new Authentication()
 
 
 

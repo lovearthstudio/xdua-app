@@ -22,8 +22,8 @@ import RoleRoutePage from './role/RoleRoutePage'
 import NavBar from '../../components/NavBar'
 
 @inject(stores => {
-  let { userStore } = stores
-  let { token } = userStore
+  let { authenticationStore } = stores
+  let { token } = authenticationStore
   return {
     token,
   }

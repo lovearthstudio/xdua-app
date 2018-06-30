@@ -4,7 +4,7 @@ import _ from 'lodash'
 import {
   queryRole,
 } from 'src/api/methods/role'
-import userStore from '../user'
+import authenticationStore from '../authentication'
 
 class SingleRole {
   @observable role = null
@@ -18,7 +18,7 @@ class SingleRole {
     try {
       self.loading = true
       self.error = null
-      const { token, duaId } = userStore
+      const { token, duaId } = authenticationStore
       // todo: should be query the single role
       let res = await queryRole({ token, duaId })
       _.forEach(res.data, (role) => {

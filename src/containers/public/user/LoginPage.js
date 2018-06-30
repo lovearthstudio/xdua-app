@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom'
 import { SIGN_UP } from 'src/data/route'
 
 @inject(stores => {
-  let { userStore } = stores
-  let { login, error } = userStore
+  let { authenticationStore } = stores
+  let { login, error } = authenticationStore
   return {
     login,
     error,

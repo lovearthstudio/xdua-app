@@ -6,7 +6,7 @@ import {
 import { EDIT_ROLE, ROLE_ID } from 'src/data/route'
 import { buildParamURI } from 'src/util'
 
-import userStore from '../user'
+import authenticationStore from '../authentication'
 
 class Role {
   @observable roles = []
@@ -23,7 +23,7 @@ class Role {
 
   @action async getRoles() {
     try {
-      const { token, duaId } = userStore
+      const { token, duaId } = authenticationStore
       let res = await queryRole({ token, duaId })
 
       self.roles = res.data

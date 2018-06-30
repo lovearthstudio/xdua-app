@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 @inject(stores => {
-  const { userStore, groupStore } = stores
-  const { userId } = userStore
+  const { authenticationStore, groupStore } = stores
+  const { userId } = authenticationStore
   const { group } = groupStore
   return {
     userId,

@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import GroupForm from 'src/components/GroupForm'
 
 @inject(stores => {
-  const { userStore, groupStore } = stores
-  const { userId } = userStore
+  const { authenticationStore, groupStore } = stores
+  const { userId } = authenticationStore
   const { createUserGroup } = groupStore
   return {
     userId,

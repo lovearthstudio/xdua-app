@@ -7,8 +7,8 @@ import PropTypes from 'prop-types'
 import {PROFILE, MY_APPS, MY_GROUPS, ROLE_LIST } from '../data/route'
 
 @inject(stores => {
-  const { userStore } = stores
-  const { logOut } = userStore
+  const { authenticationStore } = stores
+  const { logOut } = authenticationStore
   return {
     logOut,
   }

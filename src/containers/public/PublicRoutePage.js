@@ -16,8 +16,8 @@ import SignUpPage from './SignUpPage'
 
 
 @inject(stores => {
-  let { userStore } = stores
-  let { token } = userStore
+  let { authenticationStore } = stores
+  let { token } = authenticationStore
   return {
     token,
   }

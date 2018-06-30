@@ -1,11 +1,11 @@
-import userStore from './user'
+import authenticationStore from './authentication'
 import routingStore from './routing'
 import groupStore from './group'
 import roleStore from './role'
 import singleRoleStore from './role/singleRole'
 
 const stores = {
-  userStore,
+  authenticationStore,
   routingStore,
   groupStore,
   roleStore,

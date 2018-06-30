@@ -10,7 +10,7 @@ import {
 import routing from '../routing'
 import { MY_GROUPS, EDIT_GROUP, USER_GROUP_ID } from 'src/data/route'
 import { buildParamURI } from 'src/util'
-import userStore from '../user'
+import authenticationStore from '../authentication'
 
 const redirectToGroupsPage = function() {
   routing.history.push(MY_GROUPS)
@@ -29,7 +29,7 @@ class Group {
 
   @action async getGroups() {
     try {
-      const { token, duaId } = userStore
+      const { token, duaId } = authenticationStore
       let res = await queryUserGroup({ token, duaId })
       self.groups = res.data
     } catch (err) {
@@ -39,7 +39,7 @@ class Group {
 
   @action async createUserGroup({ bywho, code, name, avatar, brief }) {
     try {
-      const { token, duaId } = userStore
+      const { token, duaId } = authenticationStore
       await createUserGroup({ token, duaId, bywho, code, name, avatar, brief })
       redirectToGroupsPage()
     } catch (err) {
@@ -49,7 +49,7 @@ class Group {
 
   @action async deleteUserGroup({ userGroupId }) {
     try {
-      const { token, duaId } = userStore
+      const { token, duaId } = authenticationStore
       await deleteUserGroup({ token, duaId, userGroupId })
       self.getGroups(token)
     } catch (err) {
@@ -59,7 +59,7 @@ class Group {
 
   @action async editUserGroup({ userGroupId, name, avatar, brief }) {
     try {
-      const { token, duaId } = userStore
+      const { token, duaId } = authenticationStore
 
       await editUserGroup({ token, duaId, userGroupId, name, avatar, brief })
       redirectToGroupsPage()
@@ -80,7 +80,7 @@ class Group {
   @action async getUserGroup({ userGroupId }) {
     self.loading = true
     try {
-      const { token, duaId } = userStore
+      const { token, duaId } = authenticationStore
 
       const res = await getUserGroup({ token, duaId, userGroupId })
       self.group = res.data
