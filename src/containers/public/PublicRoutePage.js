@@ -17,9 +17,9 @@ import SignUpPage from './SignUpPage'
 
 @inject(stores => {
   let { userStore } = stores
-  let { userToken } = userStore
+  let { token } = userStore
   return {
-    userToken,
+    token,
   }
 })
 @observer
@@ -29,13 +29,13 @@ class PublicRoutePage extends Component {
   }
 
   static propTypes = {
-    userToken: PropTypes.string,
+    token: PropTypes.string,
   }
 
   render() {
-    let { userToken } = this.props
+    let { token } = this.props
 
-    if (!_.isNil(userToken)) {
+    if (!_.isNil(token)) {
       return <Redirect to={PRIVATE}/>
     }
 

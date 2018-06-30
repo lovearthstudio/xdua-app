@@ -11,12 +11,10 @@ import { GROUP_DETAIL, USER_GROUP_ID} from "src/data/route";
 
 
 @inject(stores => {
-  let { groupStore, userStore } = stores
+  let { groupStore } = stores
   let { groups, getGroups, redirectToSettings, deleteUserGroup } = groupStore
-  let { userToken } = userStore
 
   return {
-    userToken,
     groups,
     getGroups,
     redirectToSettings,
@@ -30,8 +28,8 @@ class MyGroupPage extends Component {
   }
 
   componentWillMount() {
-    const { getGroups, userToken } = this.props
-    getGroups({userToken})
+    const { getGroups } = this.props
+    getGroups()
   }
 
   static propTypes = {
@@ -39,7 +37,6 @@ class MyGroupPage extends Component {
     getGroups: PropTypes.func,
     redirectToSettings: PropTypes.func,
     deleteUserGroup: PropTypes.func,
-    userToken: PropTypes.string,
   }
 
   static renderType(type) {
@@ -54,7 +51,6 @@ class MyGroupPage extends Component {
       groups,
       redirectToSettings,
       deleteUserGroup,
-      userToken,
     } = this.props
     return _.map(groups, (g) => {
       let userGroupId = g.id
@@ -62,7 +58,7 @@ class MyGroupPage extends Component {
         redirectToSettings({ userGroupId })
       }
       const deleteGroup = () => {
-        deleteUserGroup({ token:userToken, userGroupId })
+        deleteUserGroup({ userGroupId })
       }
 
       const groupDetailURI = buildParamURI({
@@ -82,8 +78,10 @@ class MyGroupPage extends Component {
           <th scope="row">{MyGroupPage.renderType(g.enabled)}</th>
           <th scope="row">{g.brief}</th>
           <th scope="row">{g.cstamp}</th>
-          <th scope="row"><Button color={'info'} onClick={editGroup}>编辑</Button></th>
-          <th scope="row"><Button color={'danger'} onClick={deleteGroup}>删除</Button></th>
+          <th scope="row">
+            <Button color={'info'} onClick={editGroup}>编辑</Button>
+            <Button color={'danger'} onClick={deleteGroup}>删除</Button>
+          </th>
         </tr>
       )
     })

@@ -3,17 +3,9 @@ import React, { Component } from 'react'
 import { Jumbotron, Table, Button } from 'reactstrap'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-
-import { ROLE } from 'src/data/route'
 
 @inject(stores => {
-  let { userStore } = stores
-  let { userToken } = userStore
-
-  return {
-    userToken,
-  }
+  return stores
 })
 @observer
 class GroupDetailPage extends Component {
@@ -21,17 +13,14 @@ class GroupDetailPage extends Component {
     super(props)
     this.state = {
       userGroupId: null,
-      pathname: null,
     }
   }
 
   componentWillMount() {
-    const { match, location } = this.props
+    const { match } = this.props
     const { userGroupId }  = match.params
-    const { pathname } = location
     this.setState({
       userGroupId,
-      pathname,
     })
   }
 
@@ -39,13 +28,10 @@ class GroupDetailPage extends Component {
     match: PropTypes.shape({
       params: PropTypes.object,
     }),
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
   }
 
   render() {
-    let { userGroupId, pathname } = this.state
+    let { userGroupId } = this.state
     if (_.isNil(userGroupId)) {
       return (
         <div>
@@ -60,9 +46,6 @@ class GroupDetailPage extends Component {
           <h3>userGroupId: {userGroupId}</h3>
         </Jumbotron>
         <h3>
-          <Link to={pathname + ROLE}>
-            角色管理
-          </Link>
         </h3>
 
       </div>

@@ -4,7 +4,7 @@ import { Navbar, Nav, NavbarBrand, NavItem, NavLink, Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { PROFILE, MY_APPS, MY_GROUPS } from '../data/route'
+import {PROFILE, MY_APPS, MY_GROUPS, ROLE_LIST } from '../data/route'
 
 @inject(stores => {
   const { userStore } = stores
@@ -48,6 +48,11 @@ class NavBar extends Component {
             <NavItem>
               <NavLink tag={Link} to={MY_APPS}>
                 我的应用
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to={ROLE_LIST}>
+                角色管理
               </NavLink>
             </NavItem>
             <NavItem>

@@ -75,9 +75,9 @@ import {
 //
 // }
 
-export async function getRole({ token, userGroupId, role }) {
+export async function getRole({ token, duaId, userGroupId, role }) {
   const API_PATH = '/role/' + userGroupId + '/' + role
-  const generalHeaders = buildGeneralHeaders('GET', API_PATH)
+  const generalHeaders = buildGeneralHeaders('GET', API_PATH, duaId)
 
   const params = {
     token,
@@ -95,9 +95,9 @@ export async function getRole({ token, userGroupId, role }) {
 
 }
 
-export async function queryRole({ token, uid, name, brief, offset, limit, order, granter }) {
+export async function queryRole({ token, duaId, uid, ugrp, name, brief, offset, limit, order, granter }) {
   const API_PATH = '/role'
-  const generalHeaders = buildGeneralHeaders('GET', API_PATH)
+  const generalHeaders = buildGeneralHeaders('GET', API_PATH, duaId)
 
   const headers = Object.assign(
     {},
@@ -108,6 +108,7 @@ export async function queryRole({ token, uid, name, brief, offset, limit, order,
 
   const params = Object.assign({}, {
     uid,
+    ugrp,
     name,
     offset,
     brief,

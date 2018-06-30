@@ -9,6 +9,7 @@ import {
   PROFILE,
   MY_APPS,
   MY_GROUPS,
+  ROLE_LIST,
 } from 'src/data/route'
 
 import FallbackPage  from '../FallbackPage'
@@ -16,14 +17,15 @@ import ProfilePage from './profile/ProfilePage'
 import MyAppPage from './app/MyAppPage'
 import PrivatePage from './PrivatePage'
 import GroupRoutePage from './group/GroupRoutePage'
+import RoleRoutePage from './role/RoleRoutePage'
 
 import NavBar from '../../components/NavBar'
 
 @inject(stores => {
   let { userStore } = stores
-  let { userToken } = userStore
+  let { token } = userStore
   return {
-    userToken,
+    token,
   }
 })
 @observer
@@ -33,13 +35,13 @@ class PrivateRoutePage extends Component {
   }
 
   static propTypes = {
-    userToken: PropTypes.string,
+    token: PropTypes.string,
   }
 
   render() {
-    let { userToken } = this.props
+    let { token } = this.props
 
-    if (_.isNil(userToken)) {
+    if (_.isNil(token)) {
       return <Redirect to={LOGIN}/>
 
     }
@@ -51,6 +53,7 @@ class PrivateRoutePage extends Component {
           <Route exact path={PROFILE} component={ProfilePage} />
           <Route exact path={MY_APPS} component={MyAppPage}/>
           <Route path={MY_GROUPS} component={GroupRoutePage}/>
+          <Route path={ROLE_LIST} component={RoleRoutePage}/>
           <Route path={'*'} component={PrivatePage}/>
           <Route component={FallbackPage}/>
         </Switch>

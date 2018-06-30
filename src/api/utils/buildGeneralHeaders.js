@@ -2,13 +2,12 @@ import {
   APP_SECRET,
   APP_KEY,
   API_VERSION,
-  getDuaId,
 } from '../data'
 
 import { generateSign } from './Sign'
-export function buildGeneralHeaders(METHOD, API_PATH) {
+export function buildGeneralHeaders(METHOD, API_PATH, duaId) {
   return {
-    dua: getDuaId(),
+    dua: duaId,
     apiv: API_VERSION,
     sign: generateSign({
       'method': METHOD,

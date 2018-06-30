@@ -6,11 +6,9 @@ import PropTypes from 'prop-types'
 import GroupForm from 'src/components/GroupForm'
 
 @inject(stores => {
-  const { userStore, groupStore } = stores
-  const { userToken } = userStore
+  const { groupStore } = stores
   const { editUserGroup, getUserGroup, loading } = groupStore
   return {
-    userToken,
     editUserGroup,
     getUserGroup,
     loading,
@@ -23,13 +21,12 @@ class EditGroupPage extends Component {
   }
 
   componentWillMount() {
-    const { userToken, match, getUserGroup } = this.props
+    const { match, getUserGroup } = this.props
     const { userGroupId }  = match.params
-    getUserGroup({ token: userToken, userGroupId: userGroupId })
+    getUserGroup({ userGroupId: userGroupId })
   }
 
   static propTypes = {
-    userToken: PropTypes.string,
     editUserGroup: PropTypes.func,
     getUserGroup: PropTypes.func,
     match: PropTypes.object,

@@ -2,9 +2,9 @@ import {
   APP_SECRET,
   APP_KEY,
   API_VERSION,
-  setDuaId,
   axios,
   generateSign,
+  generalResponseBuilder
 } from '../../generalImports'
 
 export async function getDuaIdFromServer (model = 'unknown', man = 'unknown', os = 'unknown') {
@@ -32,18 +32,9 @@ export async function getDuaIdFromServer (model = 'unknown', man = 'unknown', os
     }),
   }
 
-  return axios.post(API_PATH, data,  {
+  let res = await axios.post(API_PATH, data,  {
     headers,
   })
-}
 
-export async function initializeDuaId() {
-  const res = await getDuaIdFromServer()
-  const { data } = res
-  if (data.status !== 0) {
-    throw new Error(data)
-  }
-
-  const { id } = data.result
-  setDuaId(id)
+  return generalResponseBuilder(res)
 }

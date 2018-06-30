@@ -4,10 +4,10 @@ import {
   generalResponseBuilder,
 } from '../../generalImports'
 
-export async function createUserGroup({ token, bywho, code, name, avatar, brief }) {
+export async function createUserGroup({ token, duaId, bywho, code, name, avatar, brief }) {
 
   const API_PATH = '/ugrp'
-  const generalHeaders = buildGeneralHeaders('POST', API_PATH)
+  const generalHeaders = buildGeneralHeaders('POST', API_PATH, duaId)
 
   const body = Object.assign({}, {
     token,
@@ -30,10 +30,10 @@ export async function createUserGroup({ token, bywho, code, name, avatar, brief 
   return generalResponseBuilder(res)
 }
 
-export async function deleteUserGroup({ token, userGroupId }) {
+export async function deleteUserGroup({ token, duaId, userGroupId }) {
 
   const API_PATH = '/ugrp/' + userGroupId
-  const generalHeaders = buildGeneralHeaders('DELETE', API_PATH)
+  const generalHeaders = buildGeneralHeaders('DELETE', API_PATH, duaId)
 
   const params = Object.assign({}, {
     token,
@@ -50,9 +50,9 @@ export async function deleteUserGroup({ token, userGroupId }) {
 
 }
 
-export async function editUserGroup({ token, userGroupId, code, name, avatar, brief, enabled }) {
+export async function editUserGroup({ token, duaId, userGroupId, code, name, avatar, brief, enabled }) {
   const API_PATH = '/ugrp/' + userGroupId
-  const generalHeaders = buildGeneralHeaders('PUT', API_PATH)
+  const generalHeaders = buildGeneralHeaders('PUT', API_PATH, duaId)
 
   const body = Object.assign({}, {
     token,
@@ -75,9 +75,9 @@ export async function editUserGroup({ token, userGroupId, code, name, avatar, br
 
 }
 
-export async function getUserGroup({ token, userGroupId }) {
+export async function getUserGroup({ token, duaId, userGroupId }) {
   const API_PATH = '/ugrp/' + userGroupId
-  const generalHeaders = buildGeneralHeaders('GET', API_PATH)
+  const generalHeaders = buildGeneralHeaders('GET', API_PATH, duaId)
 
   const params = {
     token,
@@ -95,9 +95,9 @@ export async function getUserGroup({ token, userGroupId }) {
 
 }
 
-export async function queryUserGroup({ token, uid, name, brief, offset, limit, order }) {
+export async function queryUserGroup({ token, duaId, uid, name, brief, offset, limit, order }) {
   const API_PATH = '/ugrp'
-  const generalHeaders = buildGeneralHeaders('GET', API_PATH)
+  const generalHeaders = buildGeneralHeaders('GET', API_PATH, duaId)
 
   const params = Object.assign({}, {
     token,

@@ -6,10 +6,9 @@ import GroupForm from 'src/components/GroupForm'
 
 @inject(stores => {
   const { userStore, groupStore } = stores
-  const { userToken, userId } = userStore
+  const { userId } = userStore
   const { createUserGroup } = groupStore
   return {
-    userToken,
     userId,
     createUserGroup,
   }
@@ -21,7 +20,6 @@ class CreateGroupPage extends Component {
   }
 
   static propTypes = {
-    userToken: PropTypes.string,
     userId: PropTypes.string,
     createUserGroup: PropTypes.func,
   }

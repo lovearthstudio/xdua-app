@@ -3,13 +3,11 @@ import {
   APP_SECRET,
   APP_KEY,
   API_VERSION,
-  setDuaId,
-  getDuaId,
   axios,
   generateSign,
 } from '../../generalImports'
 
-export async function login({ username, password }) {
+export async function login({ duaId, username, password }) {
 
   const API_PATH = '/login'
 
@@ -17,7 +15,7 @@ export async function login({ username, password }) {
   const formattedUsername = '+86-' + username
 
   const headers = {
-    'dua': getDuaId(),
+    'dua': duaId,
     'apiv': API_VERSION,
   }
   // Use md5 to hash the password
@@ -53,9 +51,6 @@ export async function login({ username, password }) {
   const { data } = res
 
   if (data.status === 0) {
-    let { dua_id } = data.result
-
-    setDuaId(dua_id)
 
     return data.result
   } else {

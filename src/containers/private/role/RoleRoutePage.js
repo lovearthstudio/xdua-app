@@ -3,12 +3,12 @@ import { Route, Switch } from 'react-router-dom'
 
 import {
   ROLE_LIST,
-  GROUP_DETAIL,
+  EDIT_ROLE,
 } from 'src/data/route'
 
 import FallbackPage  from 'src/containers/FallbackPage'
-import RoleListPage from './role/RoleListPage'
-import GroupDetailPage from './GroupDetailPage'
+import RoleListPage from './RoleListPage'
+import EditRolePage from './EditRolePage'
 
 class RoleRoutePage extends Component {
   constructor(props) {
@@ -20,8 +20,8 @@ class RoleRoutePage extends Component {
     return (
       <div>
         <Switch>
-          <Route path={ROLE_LIST} component={RoleListPage}/>
-          <Route path={GROUP_DETAIL} component={GroupDetailPage} />
+          <Route path={EDIT_ROLE} component={EditRolePage} />
+          <Route exact path={ROLE_LIST} component={RoleListPage} />
           <Route component={FallbackPage}/>
         </Switch>
       </div>

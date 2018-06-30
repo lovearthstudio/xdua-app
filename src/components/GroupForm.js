@@ -6,10 +6,9 @@ import _ from 'lodash'
 
 @inject(stores => {
   const { userStore, groupStore } = stores
-  const { userToken, userId } = userStore
+  const { userId } = userStore
   const { group } = groupStore
   return {
-    userToken,
     userId,
     group,
   }
@@ -38,6 +37,19 @@ class GroupForm extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
+
+  static propTypes = {
+    group: PropTypes.shape({
+      name: PropTypes.string,
+      code: PropTypes.string,
+      brief: PropTypes.string,
+    }),
+    userId: PropTypes.string,
+    submit: PropTypes.func.isRequired,
+    creating: PropTypes.bool,
+  }
+
+
   handleNameChange(e) {
     this.setState({
       name: e.target.value,
@@ -59,9 +71,8 @@ class GroupForm extends Component {
   onSubmit(e) {
     e.preventDefault()
     let { name, code, brief } = this.state
-    let { userId, userToken, submit, group } = this.props
+    let { userId, submit, group } = this.props
     let data = {
-      token: userToken,
       name,
       // todo: refactor this to the data folder
       avatar: 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/profile-icon.png',
@@ -74,18 +85,6 @@ class GroupForm extends Component {
       data.userGroupId = group.id
     }
     submit(data)
-  }
-
-  static propTypes = {
-    group: PropTypes.shape({
-      name: PropTypes.string,
-      code: PropTypes.string,
-      brief: PropTypes.string,
-    }),
-    userToken: PropTypes.string,
-    userId: PropTypes.string,
-    submit: PropTypes.func.isRequired,
-    creating: PropTypes.bool,
   }
 
   render() {

@@ -1,4 +1,4 @@
-import { initializeDuaId } from '../src/api/methods/dua'
+import { getDuaIdFromServer } from '../src/api/methods/dua'
 import { loginTest } from './login'
 import {
   createUserGroupTest,
@@ -12,46 +12,49 @@ import {
 } from './role'
 
 
-initializeDuaId().then(
-  async function() {
-    let data = await loginTest()
-    console.log('login Test')
-    console.log(data)
-    console.log('------------------------------------')
+async function demo() {
+  let data = await getDuaIdFromServer()
+  let duaId = data.id
 
-    let { token, user_id } = data
+  data = await loginTest(duaId)
+  console.log('login Test')
+  console.log(data)
+  console.log('------------------------------------')
+  duaId = data['dua_id']
 
-    // data = await createUserGroupTest(token, user_id)
-    //
-    // console.log('createUserGroupTest Test')
-    // console.log(data)
-    // console.log('------------------------------------')
+  let { token, user_id } = data
 
-    // data = await queryUserGroupTest(token)
+  // data = await createUserGroupTest(token, duaId, user_id)
+  //
+  // console.log('createUserGroupTest Test')
+  // console.log(data)
+  // console.log('------------------------------------')
+  //
+  // data = await queryUserGroupTest(token, duaId)
+  //
+  // console.log('queryUserGroup Test')
+  // console.log(data)
+  // console.log('------------------------------------')
+  //
+  // data = await getUserGroupTest(token, duaId)
+  //
+  // console.log('getUserGroupTest Test')
+  // console.log(data)
+  // console.log('------------------------------------')
+  //
+  // data = await editUserGroupTest(token, duaId)
+  //
+  // console.log('editUserGroupTest Test')
+  // console.log(data)
+  // console.log('------------------------------------')
+  //
+  // data = await deleteUserGroupTest(token, duaId)
+  //
+  // console.log('deleteUserGroupTest Test')
+  // console.log(data)
+  // console.log('------------------------------------')
 
-    // console.log('queryUserGroup Test')
-    // console.log(data)
-    // console.log('------------------------------------')
+  await roleTest(token, duaId)
+}
 
-    // data = await getUserGroupTest(token)
-    //
-    // console.log('getUserGroupTest Test')
-    // console.log(data)
-    // console.log('------------------------------------')
-
-    // data = await editUserGroupTest(token)
-    //
-    // console.log('editUserGroupTest Test')
-    // console.log(data)
-    // console.log('------------------------------------')
-    //
-    // data = await deleteUserGroupTest(token)
-    //
-    // console.log('deleteUserGroupTest Test')
-    // console.log(data)
-    // console.log('------------------------------------')
-
-    await roleTest(token)
-
-  }
-)
+demo()

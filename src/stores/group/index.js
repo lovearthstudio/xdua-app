@@ -10,6 +10,7 @@ import {
 import routing from '../routing'
 import { MY_GROUPS, EDIT_GROUP, USER_GROUP_ID } from 'src/data/route'
 import { buildParamURI } from 'src/util'
+import userStore from '../user'
 
 const redirectToGroupsPage = function() {
   routing.history.push(MY_GROUPS)
@@ -26,36 +27,41 @@ class Group {
   @observable loading = null
   @observable error = null
 
-  @action async getGroups({ token }) {
+  @action async getGroups() {
     try {
-      let res = await queryUserGroup({ token })
+      const { token, duaId } = userStore
+      let res = await queryUserGroup({ token, duaId })
       self.groups = res.data
     } catch (err) {
       self.error = err.message
     }
   }
 
-  @action async createUserGroup({ token, bywho, code, name, avatar, brief }) {
+  @action async createUserGroup({ bywho, code, name, avatar, brief }) {
     try {
-      await createUserGroup({ token, bywho, code, name, avatar, brief })
+      const { token, duaId } = userStore
+      await createUserGroup({ token, duaId, bywho, code, name, avatar, brief })
       redirectToGroupsPage()
     } catch (err) {
       self.error = err.message
     }
   }
 
-  @action async deleteUserGroup({ token, userGroupId }) {
+  @action async deleteUserGroup({ userGroupId }) {
     try {
-      await deleteUserGroup({ token, userGroupId })
+      const { token, duaId } = userStore
+      await deleteUserGroup({ token, duaId, userGroupId })
       self.getGroups(token)
     } catch (err) {
       self.error = err.message
     }
   }
 
-  @action async editUserGroup({ token, userGroupId, name, avatar, brief }) {
+  @action async editUserGroup({ userGroupId, name, avatar, brief }) {
     try {
-      await editUserGroup({ token, userGroupId, name, avatar, brief })
+      const { token, duaId } = userStore
+
+      await editUserGroup({ token, duaId, userGroupId, name, avatar, brief })
       redirectToGroupsPage()
     } catch (err) {
       self.error = err.message
@@ -71,10 +77,12 @@ class Group {
     routing.history.push(redirectedURI)
   }
 
-  @action async getUserGroup({ token, userGroupId }) {
+  @action async getUserGroup({ userGroupId }) {
     self.loading = true
     try {
-      const res = await getUserGroup({ token, userGroupId })
+      const { token, duaId } = userStore
+
+      const res = await getUserGroup({ token, duaId, userGroupId })
       self.group = res.data
     } catch (err) {
       self.error = err.message
