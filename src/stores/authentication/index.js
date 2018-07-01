@@ -13,12 +13,14 @@ import {
   login,
 } from 'src/api/methods/login'
 import { getDuaIdFromServer } from 'src/api/methods/dua'
+import { getUser, setUpUser } from 'src/api/methods/user'
 
 class Authentication {
   @observable token = null
   @observable userId = null
   @observable error = null
   @observable duaId = null
+  @observable profile = null
 
   constructor() {
     this.token = getUserToken()
@@ -45,6 +47,19 @@ class Authentication {
       })
   }
 
+  @action async getProfile() {
+    try {
+      let res = await getUser({
+        token: self.token,
+        duaId: self.duaId,
+        user_id: self.userId,
+      })
+      self.profile = res.data
+    } catch (err) {
+      self.error = err.message
+    }
+  }
+
   @action logOut() {
     self.token = null
     self.userId = null
@@ -52,6 +67,16 @@ class Authentication {
     setUserToken(null)
     setDuaId(null)
     setUserId(null)
+  }
+
+  @action async setUpUser(new_detail) {
+    try {
+      const new_user = Object.assign(self.profile, new_detail, { user_id: self.user_id })
+      let res = await setUpUser(new_user)
+      self.profile = res.data
+    } catch (err) {
+      self.error = err.message
+    }
   }
 
 }

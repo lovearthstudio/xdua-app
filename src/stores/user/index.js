@@ -5,11 +5,13 @@ import { getDuaIdFromServer } from 'src/api/methods/dua'
 import {
   signUp,
   resetPassword,
+  getUser,
 } from 'src/api/methods/user'
 import authenticationStore from '../authentication'
 
 class User {
   @observable error = null
+  @observable user = null
 
   @action resetError() {
     self.error = null
@@ -39,6 +41,16 @@ class User {
           self.error = err.message
         }
       })
+  }
+
+  @action async getUserDetail({ user_id }) {
+    const { token, duaId } = authenticationStore
+    try {
+      let res = await getUser({ token, duaId, user_id })
+      self.user = res.data
+    } catch (err) {
+      self.error = err.message
+    }
   }
 
 }
