@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { Link } from 'react-router-dom'
 
 
-import { SIGN_UP } from 'src/data/route'
+import { SIGN_UP, RESET_PASSWORD } from 'src/data/route'
 
 @inject(stores => {
   let { authenticationStore } = stores
@@ -70,11 +70,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <Link to={SIGN_UP}>
-          <Button>
-            SignUp
-          </Button>
-        </Link>
+        <Link to={SIGN_UP}>立即注册</Link>
         <Jumbotron>
           <h2 className='display-4'>登陆页面</h2>
           {this.renderError()}
@@ -96,7 +92,8 @@ class LoginPage extends Component {
                 onChange={this.handlePasswordChange}
               />
             </FormGroup>
-            <Button color={'primary'} type={'submit'} onClick={this.onSubmit}>登陆</Button>
+            <Link to={RESET_PASSWORD}>忘记密码</Link>
+            <Button block color={'primary'} type={'submit'} onClick={this.onSubmit}>登陆</Button>
           </Form>
         </Jumbotron>
       </div>

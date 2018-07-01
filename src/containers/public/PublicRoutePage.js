@@ -8,11 +8,13 @@ import {
   LOGIN,
   PRIVATE,
   SIGN_UP,
+  RESET_PASSWORD,
 } from 'src/data/route'
 
 import FallbackPage  from '../FallbackPage'
 import LoginPage from './user/LoginPage'
-import SignUpPage from './SignUpPage'
+import SignUpPage from './user/SignUpPage'
+import ResetPasswordPage from './user/ResetPasswordPage'
 
 
 @inject(stores => {
@@ -43,6 +45,7 @@ class PublicRoutePage extends Component {
       <Switch>
         <Route path={LOGIN} component={LoginPage} />
         <Route path={SIGN_UP} component={SignUpPage}/>
+        <Route path={RESET_PASSWORD} component={ResetPasswordPage}/>
         <Route component={FallbackPage}/>
       </Switch>
     )

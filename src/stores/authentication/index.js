@@ -54,10 +54,6 @@ class Authentication {
     setUserId(null)
   }
 
-  @action signUp({ username, password }) {
-
-  }
-
 }
 
 const self = new Authentication()
