@@ -6,6 +6,7 @@ import {
   EDIT_GROUP,
   MY_GROUPS,
   GROUP_DETAIL,
+  ROLE_LIST,
 } from 'src/data/route'
 
 import FallbackPage  from 'src/containers/FallbackPage'
@@ -13,6 +14,7 @@ import MyGroupPage from './MyGroupPage'
 import CreateGroupPage from './CreateGroupPage'
 import EditGroupPage from './EditGroupPage'
 import GroupDetailPage from './GroupDetailPage'
+import RoleRoutePage from './role/RoleRoutePage'
 
 class GroupRoutePage extends Component {
   constructor(props) {
@@ -26,7 +28,8 @@ class GroupRoutePage extends Component {
         <Switch>
           <Route exact path={CREATE_GROUP} component={CreateGroupPage} />
           <Route exact path={EDIT_GROUP} component={EditGroupPage} />
-          <Route path={GROUP_DETAIL} component={GroupDetailPage} />
+          <Route exact path={GROUP_DETAIL} component={GroupDetailPage} />
+          <Route path={ROLE_LIST} component={RoleRoutePage}/>
           <Route path={MY_GROUPS} component={MyGroupPage}/>
           <Route component={FallbackPage}/>
         </Switch>

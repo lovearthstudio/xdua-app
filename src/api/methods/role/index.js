@@ -4,31 +4,32 @@ import {
   generalResponseBuilder,
 } from '../../generalImports'
 
-// export async function createRole({ token, userGroupId, role, granter, name, avatar, brief }) {
-//
-//   const API_PATH = '/role'
-//   const generalHeaders = buildGeneralHeaders('POST', API_PATH)
-//
-//   const body = Object.assign({}, {
-//     token,
-//     bywho,
-//     code,
-//     name,
-//     avatar,
-//     brief,
-//   })
-//
-//
-//   let res = await axios.post(
-//     API_PATH,
-//     body,
-//     {
-//       headers: generalHeaders,
-//     }
-//   )
-//
-//   return generalResponseBuilder(res)
-// }
+export async function createRole({ token, ugrp, role, granter, name, avatar, brief }) {
+
+  const API_PATH = '/role'
+  const generalHeaders = buildGeneralHeaders('POST', API_PATH)
+
+  const body = Object.assign({}, {
+    token,
+    ugrp,
+    role,
+    granter,
+    name,
+    avatar,
+    brief,
+  })
+
+
+  let res = await axios.post(
+    API_PATH,
+    body,
+    {
+      headers: generalHeaders,
+    }
+  )
+
+  return generalResponseBuilder(res)
+}
 
 // export async function deleteUserGroup({ token, userGroupId }) {
 //
@@ -50,30 +51,31 @@ import {
 //
 // }
 //
-// export async function editUserGroup({ token, userGroupId, code, name, avatar, brief, enabled }) {
-//   const API_PATH = '/ugrp/' + userGroupId
-//   const generalHeaders = buildGeneralHeaders('PUT', API_PATH)
-//
-//   const body = Object.assign({}, {
-//     token,
-//     code,
-//     name,
-//     avatar,
-//     brief,
-//     enabled,
-//   })
-//
-//   let res = await axios.put(
-//     API_PATH,
-//     body,
-//     {
-//       headers: generalHeaders,
-//     }
-//   )
-//
-//   return generalResponseBuilder(res)
-//
-// }
+export async function editRole({ token, duaId, roleId, ugrp, role, name, avatar, brief, enabled }) {
+  const API_PATH = '/role/' + roleId
+  const generalHeaders = buildGeneralHeaders('PUT', API_PATH, duaId)
+
+  const body = Object.assign({}, {
+    token,
+    name,
+    ugrp,
+    role,
+    avatar,
+    brief,
+    enabled,
+  })
+
+  let res = await axios.put(
+    API_PATH,
+    body,
+    {
+      headers: generalHeaders,
+    }
+  )
+
+  return generalResponseBuilder(res)
+
+}
 
 export async function getRole({ token, duaId, userGroupId, role }) {
   const API_PATH = '/role/' + userGroupId + '/' + role

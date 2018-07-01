@@ -9,7 +9,6 @@ import {
   PROFILE,
   MY_APPS,
   MY_GROUPS,
-  ROLE_LIST,
 } from 'src/data/route'
 
 import FallbackPage  from '../FallbackPage'
@@ -17,7 +16,6 @@ import ProfilePage from './profile/ProfilePage'
 import MyAppPage from './app/MyAppPage'
 import PrivatePage from './PrivatePage'
 import GroupRoutePage from './group/GroupRoutePage'
-import RoleRoutePage from './role/RoleRoutePage'
 
 import NavBar from '../../components/NavBar'
 
@@ -53,7 +51,6 @@ class PrivateRoutePage extends Component {
           <Route exact path={PROFILE} component={ProfilePage} />
           <Route exact path={MY_APPS} component={MyAppPage}/>
           <Route path={MY_GROUPS} component={GroupRoutePage}/>
-          <Route path={ROLE_LIST} component={RoleRoutePage}/>
           <Route path={'*'} component={PrivatePage}/>
           <Route component={FallbackPage}/>
         </Switch>

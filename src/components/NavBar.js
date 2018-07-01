@@ -51,11 +51,6 @@ class NavBar extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to={ROLE_LIST}>
-                角色管理
-              </NavLink>
-            </NavItem>
-            <NavItem>
               <Button onClick={this.onLogOut} color={'danger'}>
                 登出
               </Button>

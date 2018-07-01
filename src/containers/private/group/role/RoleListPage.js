@@ -8,11 +8,12 @@ import { Link } from 'react-router-dom'
 import { EDIT_ROLE } from 'src/data/route'
 import { roleShape } from 'src/data/shape/roleShape'
 import { buildParamURI, isEnabled } from 'src/util'
+import {buildLoadingAndError} from "src/util";
 
 
 @inject(stores => {
   let { roleStore, routingStore } = stores
-  let { roles, getRoles, buildEditRoleURI } = roleStore
+  let { roles, getRoles, buildEditRoleURI, loading, error } = roleStore
   let { push } = routingStore
 
   return {
@@ -20,6 +21,8 @@ import { buildParamURI, isEnabled } from 'src/util'
     getRoles,
     buildEditRoleURI,
     push,
+    loading,
+    error,
   }
 })
 @observer
@@ -27,10 +30,18 @@ class RoleListPage extends Component {
   constructor(props) {
     super(props)
     this.renderRoleList = this.renderRoleList.bind(this)
+    this.state = {
+      userGroupId: null,
+    }
   }
 
   componentWillMount() {
-    this.props.getRoles()
+    const { params } = this.props.match
+    const { userGroupId } = params
+    this.setState({
+      userGroupId,
+    })
+    this.props.getRoles(userGroupId)
   }
 
   static propTypes = {
@@ -41,9 +52,12 @@ class RoleListPage extends Component {
     getRoles: PropTypes.func,
     buildEditRoleURI: PropTypes.func,
     push: PropTypes.func,
+    loading: PropTypes.bool,
+    error: PropTypes.string,
   }
 
   renderRoleList() {
+    const { userGroupId } = this.state
 
     const {
       roles,
@@ -53,7 +67,7 @@ class RoleListPage extends Component {
     return _.map(roles, (role) => {
       let roleId = role.id
       const editGroup = () => {
-        const editRoleURI = buildEditRoleURI({ roleId })
+        const editRoleURI = buildEditRoleURI({ roleId, userGroupId })
         push(editRoleURI)
       }
       // const deleteGroup = () => {
@@ -88,6 +102,12 @@ class RoleListPage extends Component {
   }
 
   render() {
+    const { loading, error } = this.props
+    let result = buildLoadingAndError({ loading, error})
+    if (!_.isNil(result)) {
+      return result
+    }
+
     return (
       <div>
         角色列表
