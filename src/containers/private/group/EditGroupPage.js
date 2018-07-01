@@ -20,7 +20,7 @@ class EditGroupPage extends Component {
     super(props)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { match, getUserGroup } = this.props
     const { userGroupId }  = match.params
     getUserGroup({ userGroupId: userGroupId })

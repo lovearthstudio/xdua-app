@@ -27,7 +27,7 @@ class GroupDetailPage extends Component {
     this.onRoleListButtonClick = this.onRoleListButtonClick.bind(this)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { match } = this.props
     const { userGroupId }  = match.params
     this.setState({

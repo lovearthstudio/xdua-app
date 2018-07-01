@@ -5,20 +5,20 @@ import _ from 'lodash'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import { EDIT_ROLE } from 'src/data/route'
+import { EDIT_ROLE, CREATE_ROLE } from 'src/data/route'
 import { roleShape } from 'src/data/shape/roleShape'
 import { buildParamURI, isEnabled } from 'src/util'
-import {buildLoadingAndError} from "src/util";
-
+import { buildLoadingAndError } from "src/util"
 
 @inject(stores => {
   let { roleStore, routingStore } = stores
-  let { roles, getRoles, buildEditRoleURI, loading, error } = roleStore
+  let { roles, getRoles, buildCreateRoleURI, buildEditRoleURI, loading, error } = roleStore
   let { push } = routingStore
 
   return {
     roles,
     getRoles,
+    buildCreateRoleURI,
     buildEditRoleURI,
     push,
     loading,
@@ -35,7 +35,7 @@ class RoleListPage extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { params } = this.props.match
     const { userGroupId } = params
     this.setState({
@@ -102,14 +102,20 @@ class RoleListPage extends Component {
   }
 
   render() {
-    const { loading, error } = this.props
+    const { loading, error, buildCreateRoleURI } = this.props
+    const { userGroupId } = this.state
     let result = buildLoadingAndError({ loading, error})
     if (!_.isNil(result)) {
       return result
     }
 
+    const createRoleURI = buildCreateRoleURI({ userGroupId })
+
     return (
       <div>
+        <Link to={createRoleURI}>
+          <Button color={'primary'} >创建角色</Button>
+        </Link>
         角色列表
         <Table responsive>
           <thead>

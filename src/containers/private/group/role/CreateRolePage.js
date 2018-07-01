@@ -10,31 +10,29 @@ import { roleShape } from 'src/data/shape/roleShape'
 import { buildLoadingAndError } from 'src/util'
 import RoleForm from 'src/components/RoleForm'
 
-
 @inject(stores => {
   let { singleRoleStore, routingStore } = stores
-  let { getRole, editRole, buildRoleListURI, role, loading, error } = singleRoleStore
+  let { buildRoleListURI, initializeRole, createRole, role, loading, error } = singleRoleStore
   let { push } = routingStore
 
   return {
     role,
-    getRole,
+    initializeRole,
     buildRoleListURI,
-    editRole,
+    createRole,
     loading,
     error,
     push,
   }
 })
 @observer
-class EditRolePage extends Component {
+class CreateRolePage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      roleId: null,
       userGroupId: null,
     }
-    this.onEditRole = this.onEditRole.bind(this)
+    this.onCreateRole = this.onCreateRole.bind(this)
   }
 
   static propTypes = {
@@ -42,31 +40,27 @@ class EditRolePage extends Component {
       params: PropTypes.object,
     }),
     role: roleShape,
-    getRole: PropTypes.func,
-    editRole: PropTypes.func,
     buildRoleListURI: PropTypes.func,
+    createRole: PropTypes.func,
+    initializeRole: PropTypes.func,
     loading: PropTypes.bool,
     error: PropTypes.string,
     push: PropTypes.func,
   }
 
   componentDidMount() {
-    const { match, getRole } = this.props
-    const { roleId, userGroupId }  = match.params
+    const { match, initializeRole } = this.props
+    initializeRole()
+    const { userGroupId }  = match.params
     this.setState({
-      roleId,
       userGroupId,
-    })
-    getRole({
-      roleId,
     })
   }
 
-  async onEditRole() {
-    const { editRole, buildRoleListURI, push } = this.props
-    const { userGroupId } = this.state
-
-    await editRole()
+  async onCreateRole() {
+    const { createRole, push, buildRoleListURI } = this.props
+    const { userGroupId }  = this.state
+    await createRole(userGroupId)
 
     // must pu the error de-referencing here
     const { error } = this.props
@@ -76,32 +70,21 @@ class EditRolePage extends Component {
     }
   }
 
-
   render() {
     const { loading, error, role } = this.props
-    const { roleId } = this.state
 
     let result = buildLoadingAndError({ loading, error})
     if (!_.isNil(result)) {
       return result
     }
 
-    if (_.isNil(role)) {
-      return (
-        <div>
-          未找到ID为{roleId}的角色
-        </div>
-      )
-    }
-
     return (
       <div>
-        编辑角色
-        {roleId}
-        <RoleForm role={role} submit={this.onEditRole} isCreate={false}/>
+        创建角色
+        <RoleForm role={role} submit={this.onCreateRole} isCreate={true}/>
       </div>
     )
   }
 }
 
-export default EditRolePage
+export default CreateRolePage

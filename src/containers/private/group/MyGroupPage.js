@@ -27,7 +27,7 @@ class MyGroupPage extends Component {
     super(props)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { getGroups } = this.props
     getGroups()
   }

@@ -5,6 +5,8 @@ export const roleShape = PropTypes.shape({
   ugrp: PropTypes.string,
   usroc: PropTypes.string,
   name: PropTypes.string,
+  granter: PropTypes.string,
+  code: PropTypes.string,
   brief: PropTypes.string,
   avartar: PropTypes.string,
   enabled: PropTypes.string,

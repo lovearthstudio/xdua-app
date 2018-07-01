@@ -3,7 +3,7 @@ import { observable, action } from 'mobx'
 import {
   queryRole,
 } from 'src/api/methods/role'
-import {EDIT_ROLE, ROLE_ID, USER_GROUP_ID} from 'src/data/route'
+import { CREATE_ROLE, EDIT_ROLE, ROLE_ID, USER_GROUP_ID} from 'src/data/route'
 import { buildParamURI } from 'src/util'
 
 import authenticationStore from '../authentication'
@@ -15,6 +15,15 @@ class Role {
   @observable loading = false
 
   @observable error = null
+
+  @action buildCreateRoleURI({ userGroupId }) {
+    return buildParamURI({
+      originalURI: CREATE_ROLE,
+      paramName: USER_GROUP_ID,
+      substitutedValue: userGroupId,
+    })
+
+  }
 
   @action buildEditRoleURI({ roleId, userGroupId }) {
     let roleURI = buildParamURI({

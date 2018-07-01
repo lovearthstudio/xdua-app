@@ -35,8 +35,8 @@ export async function createRoleTest(token ,duaId) {
   return createRole({
     token,
     duaId,
-    ugrp: 'dua',
-    role: 'chenxi-test-role',
+    ugrp: 'wikicivi',
+    code: 'chenxi_test_role',
     granter: 'root',
     name: 'chenxi-test-role-name',
   })
@@ -54,17 +54,16 @@ export async function roleTest(token, duaId) {
   // console.log('editRoleTest Test')
   // console.log(data)
   // console.log('------------------------------------')
-
   data = await createRoleTest(token, duaId)
   console.log('createRoleTest Test')
   console.log(data)
   console.log('------------------------------------')
 
 
-  data = await getRoleTest(token, duaId)
-  console.log('getRoleTest Test')
-  console.log(data)
-  console.log('------------------------------------')
+  // data = await getRoleTest(token, duaId)
+  // console.log('getRoleTest Test')
+  // console.log(data)
+  // console.log('------------------------------------')
 
 
 }
