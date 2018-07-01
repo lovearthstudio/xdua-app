@@ -9,10 +9,10 @@ const PHONE_VFCODE_TEMPLATE = 'SMS_25335288'
 const MAIL_SIGN_UP_VFCODE_TEMPLATE = 'DMS_VFC4USEREG'
 const MAIL_RESET_PASSWORD_VFCODE_TEMPLATE = 'DMS_VFC4RSTPWD'
 
-export async function getVfcodeByPhone({ username }) {
+export async function getVfcodeByPhone({duaId, username}) {
 
   const API_PATH = '/vfc'
-  const generalHeaders = buildGeneralHeaders('POST', API_PATH)
+  const generalHeaders = buildGeneralHeaders('POST', API_PATH, duaId)
 
   const formattedUsername = formatPhoneNumber(username)
 
@@ -32,7 +32,7 @@ export async function getVfcodeByPhone({ username }) {
   return generalResponseBuilder(res)
 }
 
-export async function getVfcodeByMailWhenSignUp({username}) {
+export async function getVfcodeByMailWhenSignUp({duaId, username}) {
 
   const API_PATH = '/vfc'
   const generalHeaders = buildGeneralHeaders('POST', API_PATH, duaId)
@@ -53,7 +53,7 @@ export async function getVfcodeByMailWhenSignUp({username}) {
   return generalResponseBuilder(res)
 }
 
-export async function getVfcodeByMailWhenResetPassword({username}) {
+export async function getVfcodeByMailWhenResetPassword({duaId, username}) {
 
   const API_PATH = '/vfc'
   const generalHeaders = buildGeneralHeaders('POST', API_PATH, duaId)

@@ -3,6 +3,7 @@ import { observable, action } from 'mobx'
 import {
   getVfcodeByPhone,
 } from 'src/api/methods/vfcode'
+import { getDuaIdFromServer } from 'src/api/methods/dua'
 
 class Vfcode {
 
@@ -12,13 +13,20 @@ class Vfcode {
     self.error = null
   }
 
-  @action async getVfcodeByPhone({ username }) {
-    try {
-      await getVfcodeByPhone({username })
-    } catch (err) {
-      console.log(err)
-      self.error = err.message
-    }
+  @action
+  async getVfcodeByPhone({username}) {
+
+    getDuaIdFromServer().then(
+      async function (duaRes) {
+        try {
+          const duaId = duaRes['id']
+          await getVfcodeByPhone({username, duaId})
+        }
+        catch (err) {
+          console.log(err)
+          self.error = err.message
+        }
+      })
   }
 }
 
