@@ -21,6 +21,6 @@ export const GROUP_DETAIL = MY_GROUPS + '/group/' + USER_GROUP_ID + '/detail'
 // ROLE
 export const ROLE = '/roles'
 export const ROLE_ID = ':roleId'
-export const ROLE_LIST = PRIVATE + ROLE
+export const ROLE_LIST = GROUP_DETAIL + ROLE
 export const EDIT_ROLE = ROLE_LIST + '/edit/' + ROLE_ID
 

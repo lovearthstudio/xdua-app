@@ -29,8 +29,8 @@ class Group {
 
   @action async getGroups() {
     try {
-      const { token, duaId } = authenticationStore
-      let res = await queryUserGroup({ token, duaId })
+      const { token, duaId, userId } = authenticationStore
+      let res = await queryUserGroup({ token, duaId, uid: userId })
       self.groups = res.data
     } catch (err) {
       self.error = err.message
@@ -81,7 +81,6 @@ class Group {
     self.loading = true
     try {
       const { token, duaId } = authenticationStore
-
       const res = await getUserGroup({ token, duaId, userGroupId })
       self.group = res.data
     } catch (err) {

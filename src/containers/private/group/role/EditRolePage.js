@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 
 import { CREATE_GROUP } from 'src/data/route'
 import { roleShape } from 'src/data/shape/roleShape'
+import { buildLoadingAndError } from 'src/util'
 
 
 @inject(stores => {
@@ -55,20 +56,9 @@ class EditRolePage extends Component {
     const { loading, error, role } = this.props
     const { roleId } = this.state
 
-    if (loading) {
-      return (
-        <div>
-          加载中
-        </div>
-      )
-    }
-
-    if (error) {
-      return (
-        <div>
-          {error}
-        </div>
-      )
+    let result = buildLoadingAndError({ loading, error})
+    if (!_.isNil(result)) {
+      return result
     }
 
     if (_.isNil(role)) {
@@ -78,7 +68,6 @@ class EditRolePage extends Component {
         </div>
       )
     }
-    console.log(role)
     return (
       <div>
         编辑角色

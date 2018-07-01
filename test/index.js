@@ -44,14 +44,14 @@ async function demo() {
   console.log('login Test')
   console.log(data)
   console.log('------------------------------------')
-  // duaId = data['dua_id']
+  duaId = data['dua_id']
 
   let { token, user_id } = data
 
-  data = await resetPasswordByPhoneTest(token, duaId, user_id)
-  console.log('resetPasswordTest Test')
-  console.log(data)
-  console.log('------------------------------------')
+  // data = await resetPasswordByPhoneTest(token, duaId, user_id)
+  // console.log('resetPasswordTest Test')
+  // console.log(data)
+  // console.log('------------------------------------')
 
   // data = await setUpUserTest(token, duaId, user_id)
   // console.log('setUpUserTest Test')
@@ -74,11 +74,11 @@ async function demo() {
   // console.log(data)
   // console.log('------------------------------------')
   //
-  // data = await queryUserGroupTest(token, duaId)
-  //
-  // console.log('queryUserGroup Test')
-  // console.log(data)
-  // console.log('------------------------------------')
+  data = await queryUserGroupTest(token, duaId)
+
+  console.log('queryUserGroup Test')
+  console.log(data)
+  console.log('------------------------------------')
   //
   // data = await getUserGroupTest(token, duaId)
   //
