@@ -6,46 +6,46 @@ import _ from 'lodash'
 
 
 @inject(stores => {
-  // let { driverStore, orderStore } = stores
-  // let { driver, driverId } = driverStore
-  // let {
-  //   getAvailableSubmissions,
-  //   availableSubmissions,
-  //   createOrder,
-  //   filteredOrders,
-  //   setFilterByStart,
-  //   setFilterByEnd,
-  //   setFilterByLuggageNumber,
-  // } = orderStore
-  //
-  // return {
-  //   driver,
-  //   driverId,
-  //   getAvailableSubmissions,
-  //   availableSubmissions,
-  //   createOrder,
-  //   filteredOrders,
-  //   setFilterByStart,
-  //   setFilterByEnd,
-  //   setFilterByLuggageNumber,
-  // }
+  let { authenticationStore } = stores
+  let { profile, getProfile } = authenticationStore
+
+  return {
+    profile,
+    getProfile,
+  }
 })
 @observer
 class ProfilePage extends Component {
   constructor(props) {
     super(props)
+    this.props.getProfile()
   }
 
   static propTypes = {
-    // driver: MobxPropTypes.observableObject,
-    // driverId: PropTypes.string,
-    // getAvailableSubmissions: PropTypes.func,
-    // availableSubmissions: MobxPropTypes.observableArray,
-    // createOrder: PropTypes.func,
-    // filteredOrders: PropTypes.array,
-    // setFilterByStart: PropTypes.func,
-    // setFilterByEnd: PropTypes.func,
-    // setFilterByLuggageNumber: PropTypes.func,
+    getProfile: PropTypes.func,
+    profile: PropTypes.shape({
+      name: PropTypes.string,
+      avatar: PropTypes.string,
+      brief: PropTypes.string,
+      tel: PropTypes.string,
+      saying: PropTypes.string,
+    }),
+  }
+
+  componentWillMount() {
+  }
+
+  renderProfile() {
+    let { profile } = this.props
+    if (_.isNil(profile)) {
+      return (
+        <div>未找到账户信息</div>)
+    } else {
+      let { id, name } = profile
+      return(<div>
+          账号ID： {id}<br/>
+          name: {name}</div>)
+    }
   }
 
 
@@ -55,6 +55,9 @@ class ProfilePage extends Component {
         <Jumbotron>
           <h3 className='display-4'>用户信息页面</h3>
         </Jumbotron>
+        <div>
+          {this.renderProfile()}
+        </div>
       </div>
     )
   }

@@ -45,15 +45,14 @@ export async function signUp({ duaId, username, password, vfcode, ugrp, role, by
   return generalResponseBuilder(res)
 }
 
-export async function resetPassword({ token, duaId, username, password, vfcode, user_id, byPhone }) {
+export async function resetPassword({duaId, username, password, vfcode, byPhone }) {
 
-  const API_PATH = '/pass/' + user_id
-  const generalHeaders = buildGeneralHeaders('PUT', API_PATH, duaId)
+  const API_PATH = '/repass'
+  const generalHeaders = buildGeneralHeaders('POST', API_PATH, duaId)
 
   const passwordMD5 = md5(password)
 
   let body = Object.assign({}, {
-    token,
     action: 'reset',
     pwd: passwordMD5,
     vfcode,
@@ -61,7 +60,7 @@ export async function resetPassword({ token, duaId, username, password, vfcode, 
   body = formatBodyBySignUpType(body, username, byPhone)
 
   console.log(body)
-  let res = await axios.put(
+  let res = await axios.post(
     API_PATH,
     body,
     {

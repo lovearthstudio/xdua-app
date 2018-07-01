@@ -3,6 +3,7 @@ export const ROOT = '/'
 export const PUBLIC = '/public'
 export const LOGIN = PUBLIC + '/login'
 export const SIGN_UP = PUBLIC + '/signUp'
+export const RESET_PASSWORD = PUBLIC + '/resetPassword'
 
 export const PRIVATE = '/private'
 

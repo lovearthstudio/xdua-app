@@ -1,23 +1,32 @@
 import { observable, action } from 'mobx'
 
 import {
-  queryRole,
+  getVfcodeByPhone,
 } from 'src/api/methods/vfcode'
-
-import authenticationStore from '../authentication'
+import { getDuaIdFromServer } from 'src/api/methods/dua'
 
 class Vfcode {
 
-  @action async getVfcode() {
-    try {
-      const { duaId } = authenticationStore
-      console.log('duaId', duaId)
-      let res = await queryRole({ duaId })
+  @observable error = null
 
-      self.roles = res.data
-    } catch (err) {
-      self.error = err.message
-    }
+  @action resetError() {
+    self.error = null
+  }
+
+  @action
+  async getVfcodeByPhone({username}) {
+
+    getDuaIdFromServer().then(
+      async function (duaRes) {
+        try {
+          const duaId = duaRes['id']
+          await getVfcodeByPhone({username, duaId})
+        }
+        catch (err) {
+          console.log(err)
+          self.error = err.message
+        }
+      })
   }
 }
 
