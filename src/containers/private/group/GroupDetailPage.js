@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import {
   ROLE_LIST,
   USER_GROUP_ID,
+  USER_ROLE_LIST,
 } from 'src/data/route'
 import { buildParamURI }from 'src/util'
 
@@ -25,6 +26,7 @@ class GroupDetailPage extends Component {
       userGroupId: null,
     }
     this.onRoleListButtonClick = this.onRoleListButtonClick.bind(this)
+    this.onUserRoleListButtonClick = this.onUserRoleListButtonClick.bind(this)
   }
 
   componentDidMount() {
@@ -53,6 +55,17 @@ class GroupDetailPage extends Component {
     push(roleListURI)
   }
 
+  onUserRoleListButtonClick() {
+    const { userGroupId } = this.state
+    const { push } = this.props
+    const userRoleListURI = buildParamURI({
+      originalURI: USER_ROLE_LIST,
+      paramName: USER_GROUP_ID,
+      substitutedValue: userGroupId,
+    })
+    push(userRoleListURI)
+  }
+
   render() {
     let { userGroupId } = this.state
     if (_.isNil(userGroupId)) {
@@ -71,6 +84,10 @@ class GroupDetailPage extends Component {
         <h3>
           <Button onClick={this.onRoleListButtonClick}>
             角色列表
+          </Button>
+          <br/>
+          <Button onClick={this.onUserRoleListButtonClick}>
+            授权列表
           </Button>
         </h3>
 

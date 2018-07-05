@@ -7,18 +7,25 @@ import { Link } from 'react-router-dom'
 
 import { EDIT_ROLE, CREATE_ROLE } from 'src/data/route'
 import { roleShape } from 'src/data/shape/roleShape'
+import { userRoleShape } from 'src/data/shape/userRoleShape'
 import { buildParamURI, isEnabled } from 'src/util'
-import { buildLoadingAndError } from "src/util"
+import { buildLoadingAndError } from 'src/util'
 
 @inject(stores => {
-  let { roleStore, routingStore } = stores
-  let { roles, getRoles, buildCreateRoleURI, buildEditRoleURI, loading, error } = roleStore
+  let { userRoleStore, routingStore } = stores
+  let {
+    userRoles,
+    getUserRoles,
+    buildCreateUserRoleURI,
+    buildEditRoleURI,
+    loading,
+    error } = userRoleStore
   let { push } = routingStore
 
   return {
-    roles,
-    getRoles,
-    buildCreateRoleURI,
+    userRoles,
+    getUserRoles,
+    buildCreateUserRoleURI,
     buildEditRoleURI,
     push,
     loading,
@@ -26,10 +33,10 @@ import { buildLoadingAndError } from "src/util"
   }
 })
 @observer
-class RoleListPage extends Component {
+class UserRoleListPage extends Component {
   constructor(props) {
     super(props)
-    this.renderRoleList = this.renderRoleList.bind(this)
+    this.renderUserRoleList = this.renderUserRoleList.bind(this)
     this.state = {
       userGroupId: null,
     }
@@ -41,36 +48,36 @@ class RoleListPage extends Component {
     this.setState({
       userGroupId,
     })
-    this.props.getRoles(userGroupId)
+    this.props.getUserRoles(userGroupId)
   }
 
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.object,
     }),
-    roles: MobxPropTypes.observableArrayOf(roleShape),
-    getRoles: PropTypes.func,
+    userRoles: MobxPropTypes.observableArrayOf(userRoleShape),
+    getUserRoles: PropTypes.func,
     buildEditRoleURI: PropTypes.func,
     push: PropTypes.func,
     loading: PropTypes.bool,
     error: PropTypes.string,
   }
 
-  renderRoleList() {
+  renderUserRoleList() {
     const { userGroupId } = this.state
 
     const {
-      roles,
+      userRoles,
       push,
       buildEditRoleURI,
     } = this.props
-    console.log(roles)
-    return _.map(roles, (role) => {
-      let roleId = role.id
-      const editGroup = () => {
-        const editRoleURI = buildEditRoleURI({ roleId, userGroupId })
-        push(editRoleURI)
-      }
+    console.log(userRoles)
+    return _.map(userRoles, (userRole) => {
+      let userRoleId = userRole.id
+      // const editGroup = () => {
+      //   const editRoleURI = buildEditRoleURI({ roleId, userGroupId })
+      //   push(editRoleURI)
+      // }
       // const deleteGroup = () => {
       //   deleteUserGroup({ token:userToken, userGroupId })
       // }
@@ -81,56 +88,54 @@ class RoleListPage extends Component {
       //   substitutedValue: userGroupId,
       // })
       return (
-        <tr key={roleId}>
-          <th scope="row">
-            {/*<Link to={groupDetailURI}>*/}
-            {role.name}
-            {/*</Link>*/}
-          </th>
-          <th scope="row">{role.ugrp}</th>
-          <th scope="row">{role.usroc}</th>
-          <th scope="row">{isEnabled(role.enabled)}</th>
-          <th scope="row">{role.brief}</th>
-          <th scope="row">
-            <Button color={'info'} onClick={editGroup}>编辑</Button>
-          </th>
+        <tr key={userRoleId}>
+          {/*<th scope="row">*/}
+            {/*/!*<Link to={groupDetailURI}>*!/*/}
+            {/*{userRole.name}*/}
+            {/*/!*</Link>*!/*/}
+          {/*</th>*/}
+          <th scope="row">{userRole.uid}</th>
+          <th scope="row">{userRole.role}</th>
+          <th scope="row">{userRole.byuid}</th>
+          <th scope="row">{userRole.note}</th>
+          <th scope="row">{isEnabled(userRole.enabled)}</th>
+          {/*<th scope="row">*/}
+            {/*<Button color={'info'} onClick={editGroup}>编辑</Button>*/}
+          {/*</th>*/}
           {/*<th scope="row"><Button color={'danger'} onClick={deleteGroup}>删除</Button></th>*/}
         </tr>
       )
     })
-
-
   }
 
   render() {
-    const { loading, error, buildCreateRoleURI } = this.props
+    const { loading, error, buildCreateUserRoleURI } = this.props
     const { userGroupId } = this.state
     let result = buildLoadingAndError({ loading, error})
     if (!_.isNil(result)) {
       return result
     }
 
-    const createRoleURI = buildCreateRoleURI({ userGroupId })
+    const createUserRoleURI = buildCreateUserRoleURI({ userGroupId })
 
     return (
       <div>
-        <Link to={createRoleURI}>
-          <Button color={'primary'} >创建角色</Button>
+        <Link to={createUserRoleURI}>
+          <Button color={'primary'} >创建授权</Button>
         </Link>
-        角色列表
+        授权列表 from 用户群：{this.state.userGroupId}
         <Table responsive>
           <thead>
             <tr>
-              <th>名称</th>
-              <th>户群名</th>
-              <th>授权数量</th>
-              <th>状态</th>
-              <th>描述</th>
+              <th>用户名字</th>
+              <th>用户角色</th>
+              <th>授权人名字</th>
+              <th>备注</th>
               <th>操作</th>
             </tr>
           </thead>
           <tbody>
-            {this.renderRoleList()}
+            {this.renderUserRoleList()}
           </tbody>
         </Table>
       </div>
@@ -138,4 +143,4 @@ class RoleListPage extends Component {
   }
 }
 
-export default RoleListPage
+export default UserRoleListPage

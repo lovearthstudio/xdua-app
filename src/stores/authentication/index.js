@@ -38,6 +38,7 @@ class Authentication {
 
           self.userId = res['user_id']
           setUserId(self.userId)
+          console.log(self.userId)
 
           self.duaId = res['dua_id']
           setDuaId(self.duaId)

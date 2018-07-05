@@ -19,6 +19,9 @@ import  {
   getVfcodeByPhoneTest,
   getVfcodeByMailWhenSignUpTest
 } from './user'
+import  {
+  userRoleTest,
+} from './userRole'
 
 
 async function demo() {
@@ -99,6 +102,8 @@ async function demo() {
   // console.log('------------------------------------')
 
   // await roleTest(token, duaId)
+
+  await userRoleTest(token, duaId)
 }
 
 demo()

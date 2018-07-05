@@ -5,6 +5,7 @@ import roleStore from './role'
 import singleRoleStore from './role/singleRole'
 import vfcodeStore from './vfcode'
 import userStore from './user'
+import userRoleStore from './userRole'
 
 const stores = {
   authenticationStore,
@@ -14,6 +15,7 @@ const stores = {
   singleRoleStore,
   vfcodeStore,
   userStore,
+  userRoleStore,
 }
 
 export default stores

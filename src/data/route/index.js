@@ -25,3 +25,9 @@ export const ROLE_LIST = GROUP_DETAIL + ROLE
 export const EDIT_ROLE = ROLE_LIST + '/edit/' + ROLE_ID
 export const CREATE_ROLE = ROLE_LIST + '/create'
 
+// UserRole
+export const USER_ROLE = '/userRoles'
+export const USER_ROLE_ID = ':userRoleId'
+export const USER_ROLE_LIST = GROUP_DETAIL + USER_ROLE
+export const EDIT_USER_ROLE = USER_ROLE_LIST + '/edit/' + USER_ROLE_ID
+export const CREATE_USER_ROLE = USER_ROLE_LIST + '/create'
